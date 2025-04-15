@@ -1,0 +1,15 @@
+.input-grid {
+  display: grid;
+  grid-template-columns: min(35%, 150px) min(65%, 400px);
+  margin-top: 10px;
+}
+
+.input-grid label {
+  text-align: right;
+  margin-right: 10px;
+}
+
+.input-grid input {
+  height: 5vh;
+  font-size: 1em;
+}

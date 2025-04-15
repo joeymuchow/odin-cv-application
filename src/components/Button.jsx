@@ -1,7 +1,9 @@
-function Button(props) {
+import "../styles/Button.css";
+
+function Button({ className, onClick, text }) {
 
     return (
-        <button onClick={props.onClick}>{props.text}</button>
+        <button className={className} onClick={onClick}>{text}</button>
     )
 }
 

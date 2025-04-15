@@ -24,9 +24,10 @@ function App() {
   // Clicking edit will show the components for entering info again, with their current values filled in
   return (
     <>
+      <h1>CV Generation Application</h1>
       {showCV ? (
         <div>
-          <Button text="Edit" onClick={() => setShowCV(false)} />
+          <Button className="edit-btn" text="Edit" onClick={() => setShowCV(false)} />
         </div>
       ) : (
         <form className="cv-form">
@@ -43,6 +44,7 @@ function App() {
             setPracticalExp={setPracticalExp}
           />
           <Button
+            className="submit-form"
             text="Submit"
             onClick={(e) => {
               e.preventDefault();

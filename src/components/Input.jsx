@@ -1,6 +1,8 @@
-function Input({ id, label, type = "text", onChange }) {
+import "../styles/Input.css";
+
+function Input({ id, label, type = "text", onChange, parentClass = "input-grid" }) {
   return (
-    <div>
+    <div className={parentClass}>
       <label htmlFor={id}>{label}</label>
       <input type={type} id={id} onChange={onChange} />
     </div>
