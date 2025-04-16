@@ -10,6 +10,10 @@
 }
 
 .input-grid input {
-  height: 5vh;
-  font-size: 1em;
+  font-size: 1.2em;
+}
+
+.input-grid + p {
+  color: #aa0000;
+  margin: 5px 0;
 }

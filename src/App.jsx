@@ -10,6 +10,11 @@ function App() {
   const [educationalExp, setEducationalExp] = useState({});
   const [practicalExp, setPracticalExp] = useState({});
   const [showCV, setShowCV] = useState(false);
+  const [errors, setErrors] = useState({
+    generalInformation: {},
+    educationalExperience: {},
+    practicalExperience: {},
+  });
 
   // Should all the components below be surrounded by a form?
   // As in this file has a form element surrounding all components
@@ -34,6 +39,8 @@ function App() {
           <GeneralInformation
             generalInfo={generalInfo}
             setGeneralInfo={setGeneralInfo}
+            errors={errors}
+            setErrors={setErrors}
           />
           <EducationalExperience
             educationalExp={educationalExp}
@@ -48,13 +55,55 @@ function App() {
             text="Submit"
             onClick={(e) => {
               e.preventDefault();
-              setShowCV(true);
+              if (validateGeneralInfo(generalInfo, errors, setErrors)) {
+                setShowCV(true);
+              }
             }}
           />
         </form>
       )}
     </>
   );
+}
+
+function validateGeneralInfo(generalInfo, errors, setErrors) {
+  let validInputs = 0;
+  const inputs = document.querySelectorAll(".general-information input");
+  let errorObj = errors;
+  console.log(inputs);
+  console.log(generalInfo);
+  for (const input of inputs) {
+    const key = convertKebabToCamel(input.id);
+    console.log(key);
+    if (generalInfo[key]) {
+      validInputs += 1;
+    } else {
+      errorObj = {
+        ...errorObj,
+        generalInformation: {
+          ...errorObj.generalInformation,
+          [key]: "This field is required."
+        }
+      };
+      console.log(errorObj);
+    }
+  }
+  setErrors(errorObj);
+  return validInputs === inputs.length;
+}
+
+function convertKebabToCamel(id) {
+  const idArray = id.split("-");
+
+  if (idArray.length === 1) {
+    return idArray[0];
+  } else {
+    let camelCaseId = idArray[0];
+    for (let i = 1; i < idArray.length; i++) {
+      camelCaseId += idArray[i][0].toUpperCase() + idArray[i].slice(1);
+    }
+    return camelCaseId;
+  }
 }
 
 export default App;

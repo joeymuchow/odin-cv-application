@@ -1,56 +1,85 @@
 import Input from "./Input";
 
-function GeneralInformation({ generalInfo, setGeneralInfo }) {
-  // name, two inputs for first/last or one input for the whole name?
-  // Should I make components for name, email, and phone?
-
-  // TODO: validation for inputs, maybe that should be a part of the submit button click instead
+function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) {
 
   return (
-    <>
+    <div className="general-information">
+      <h2>General Information</h2>
       <Input
         id="first-name"
         label="First name"
-        onChange={(e) =>
+        onChange={(e) => {
           setGeneralInfo({
             ...generalInfo,
             firstName: e.target.value,
-          })
-        }
+          });
+          setErrors({
+            ...errors,
+            generalInformation: {
+                ...errors.generalInformation,
+                firstName: "",
+            }
+          });
+        }}
+        errorMessage={errors.generalInformation.firstName}
       />
       <Input
         id="last-name"
         label="Last name"
-        onChange={(e) =>
+        onChange={(e) => {
           setGeneralInfo({
             ...generalInfo,
             lastName: e.target.value,
-          })
-        }
+          });
+          setErrors({
+            ...errors,
+            generalInformation: {
+                ...errors.generalInformation,
+                lastName: "",
+            }
+          });
+        }}
+        errorMessage={errors.generalInformation.lastName}
       />
       <Input
         id="email"
         label="Email"
         type="email"
-        onChange={(e) =>
+        onChange={(e) => {
           setGeneralInfo({
             ...generalInfo,
             email: e.target.value,
-          })
-        }
+          });
+          setErrors({
+            ...errors,
+            generalInformation: {
+                ...errors.generalInformation,
+                email: "",
+            }
+          });
+        }}
+        errorMessage={errors.generalInformation.email}
       />
       <Input
         id="phone"
         label="Phone"
         type="phone"
-        onChange={(e) =>
+        onChange={(e) => {
           setGeneralInfo({
             ...generalInfo,
             phone: e.target.value,
-          })
-        }
+          });
+          setErrors({
+            ...errors,
+            generalInformation: {
+                ...errors.generalInformation,
+                phone: "",
+            }
+          });
+        }}
+        errorMessage={errors.generalInformation.phone}
       />
-    </>
+    </div>
   );
 }
 
