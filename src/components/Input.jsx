@@ -12,7 +12,10 @@ function Input({
     <>
       <div className={parentClass}>
         <label htmlFor={id}>{label}</label>
-        <input type={type} id={id} onChange={onChange} />
+        {type === "textarea" ? 
+          <textarea id={id} onChange={onChange} rows="5" cols="30" /> :
+          <input type={type} id={id} onChange={onChange} />
+        }
       </div>
       {errorMessage && <p className="error">{errorMessage}</p>}
     </>
