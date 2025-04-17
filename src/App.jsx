@@ -70,8 +70,7 @@ function validateGeneralInfo(generalInfo, errors, setErrors) {
   let validInputs = 0;
   const inputs = document.querySelectorAll(".general-information input");
   let errorObj = errors;
-  console.log(inputs);
-  console.log(generalInfo);
+
   for (const input of inputs) {
     const key = convertKebabToCamel(input.id);
     console.log(key);
@@ -85,9 +84,9 @@ function validateGeneralInfo(generalInfo, errors, setErrors) {
           [key]: "This field is required."
         }
       };
-      console.log(errorObj);
     }
   }
+  
   setErrors(errorObj);
   return validInputs === inputs.length;
 }
