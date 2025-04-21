@@ -1,7 +1,11 @@
-.submit-form {
-  background-color: hsl(204, 100%, 40%);
+button {
   color: #FFFFFF;
   margin-top: 10px;
+}
+
+.submit-form {
+  background-color: hsl(204, 100%, 40%);
+  margin-top: 25px;
 }
 
 .submit-form:hover {
@@ -13,5 +17,27 @@
 }
 
 .add-schools, .add-jobs {
-  margin-top: 10px;
+  background-color: hsl(115, 80%, 30%);
+  margin-top: 25px;
+}
+
+.add-schools:hover, .add-jobs:hover {
+  background-color: hsl(115, 80%, 35%);
+}
+
+.add-schools:active, .add-jobs:active {
+  background-color: hsl(115, 80%, 20%);
+}
+
+.delete-exp-btn {
+  background-color: hsl(0, 80%, 45%);
+  padding: 0.5em 1em;
+}
+
+.delete-exp-btn:hover {
+  background-color: hsl(0, 80%, 48%);
+}
+
+.delete-exp-btn:active {
+  background-color: hsl(0, 80%, 38%);
 }

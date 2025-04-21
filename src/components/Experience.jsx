@@ -12,6 +12,13 @@ function Experience({ experience, setExperience, containerClass, title, addButto
       {expArray && expArray.map((value, index) => (
         <div key={value.id}>
           <value.component experience={experience} setExperience={setExperience} idIndex={value.id} expType={expType} inputInfo={inputInfo} />
+          <Button className="delete-exp-btn" text="Delete" onClick={() => {
+            const array = [...expArray];
+            const filteredArray = array.filter((experience) => {
+              return value.id !== experience.id;
+            });
+            setExpArray(filteredArray);
+          }} />
           {index !== expArray.length - 1 && (
             <hr />
           )}
