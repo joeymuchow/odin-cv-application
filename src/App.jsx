@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import "./App.css";
 import GeneralInformation from "./components/GeneralInformation";
 import EducationalExperience from "./components/EducationalExperience";
@@ -6,9 +6,13 @@ import PracticalExperience from "./components/PracticalExperience";
 import Button from "./components/Button";
 
 function App() {
-  const [generalInfo, setGeneralInfo] = useState({});
   const [educationalExp, setEducationalExp] = useState({});
   const [practicalExp, setPracticalExp] = useState({});
+  const [state, dispatch] = useReducer(reducer, {
+    generalInformation: {},
+    educationalExperience: [],
+    practicalExperience: [],
+  });
   const [showCV, setShowCV] = useState(false);
   const [errors, setErrors] = useState({
     generalInformation: {},
@@ -31,8 +35,8 @@ function App() {
       ) : (
         <form className="cv-form">
           <GeneralInformation
-            generalInfo={generalInfo}
-            setGeneralInfo={setGeneralInfo}
+            state={state}
+            dispatch={dispatch}
             errors={errors}
             setErrors={setErrors}
           />
@@ -53,7 +57,7 @@ function App() {
             text="Submit"
             onClick={(e) => {
               e.preventDefault();
-              const genInfoResult = validateSectionInfo(generalInfo, errors, setErrors, "general-information", "generalInformation");
+              const genInfoResult = validateSectionInfo(state.generalInformation, errors, setErrors, "general-information", "generalInformation");
               const eduExpResult = validateSectionInfo(educationalExp, errors, setErrors, "educational-experience", "educationalExperience");
               const pracExpResult = validateSectionInfo(practicalExp, errors, setErrors, "practical-experience", "practicalExperience");
               if (genInfoResult && eduExpResult && pracExpResult) {
@@ -67,13 +71,44 @@ function App() {
   );
 }
 
+function reducer(state, action) {
+  switch(action.type) {
+    case "update_general_information": {
+      return {
+        ...state,
+        generalInformation: {
+          ...state.generalInformation,
+          [action.key]: action.value,
+        },
+      };
+    }
+    // experienceType: educationalExperience || practicalExperience
+    case "update_experience": {
+      return {
+        ...state,
+        [action.experienceType]: state[action.experienceType].map((item) =>
+          item.id === action.id ? {...item, [action.key]: action.value} : item
+        ),
+      };
+    }
+    case "remove_Experience": {
+      return {
+        ...state,
+        [action.experienceType]: state[action.experienceType].filter((value) => value.id !== action.id),
+      };
+    }
+  }
+
+  throw Error("Unknown action.: " + action.type);
+}
+
 function validateSectionInfo(state, errors, setErrors, containerClass, errorKey) {
   let validInputs = 0;
   const inputs = document.querySelectorAll(`.${containerClass} input`);
 
   for (const input of inputs) {
     const key = convertKebabToCamel(input.id);
-    if (state[key] && state[key] !== "") {
+    if ((state[key] && state[key] !== "") || key.includes("endDate")) {
       validInputs += 1;
     } else {
       setErrors( errors => ({
@@ -102,5 +137,7 @@ function convertKebabToCamel(id) {
     return camelCaseId;
   }
 }
+
+// TODO: validate that the start date is not after the end date
 
 export default App;

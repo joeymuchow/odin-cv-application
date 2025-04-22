@@ -1,6 +1,6 @@
 import Input from "./Input";
 
-function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) {
+function GeneralInformation({ state, dispatch, errors, setErrors }) {
 
   return (
     <div className="general-information">
@@ -8,10 +8,12 @@ function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) 
       <Input
         id="first-name"
         label="First name"
+        value={state.generalInformation.firstName}
         onChange={(e) => {
-          setGeneralInfo({
-            ...generalInfo,
-            firstName: e.target.value,
+          dispatch({
+            type: "update_general_information",
+            key: "firstName",
+            value: e.target.value,
           });
           setErrors(errors => ({
             ...errors,
@@ -26,10 +28,12 @@ function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) 
       <Input
         id="last-name"
         label="Last name"
+        value={state.generalInformation.lastName}
         onChange={(e) => {
-          setGeneralInfo({
-            ...generalInfo,
-            lastName: e.target.value,
+          dispatch({
+            type: "update_general_information",
+            key: "lastName",
+            value: e.target.value,
           });
           setErrors(errors => ({
             ...errors,
@@ -44,11 +48,13 @@ function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) 
       <Input
         id="email"
         label="Email"
+        value={state.generalInformation.email}
         type="email"
         onChange={(e) => {
-          setGeneralInfo({
-            ...generalInfo,
-            email: e.target.value,
+          dispatch({
+            type: "update_general_information",
+            key: "email",
+            value: e.target.value,
           });
           setErrors(errors => ({
             ...errors,
@@ -63,11 +69,13 @@ function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) 
       <Input
         id="phone"
         label="Phone"
+        value={state.generalInformation.phone}
         type="phone"
         onChange={(e) => {
-          setGeneralInfo({
-            ...generalInfo,
-            phone: e.target.value,
+          dispatch({
+            type: "update_general_information",
+            key: "phone",
+            value: e.target.value,
           });
           setErrors(errors => ({
             ...errors,
