@@ -16,12 +16,6 @@ function App() {
     practicalExperience: {},
   });
 
-  // Should all the components below be surrounded by a form?
-  // As in this file has a form element surrounding all components
-  // General information
-  // Educational experience
-  // Practical experience
-
   // make a visual component that uses info from above components to create a resume
 
   // There will be a submit button for taking all the entered info and displaying it in a view
@@ -45,17 +39,24 @@ function App() {
           <EducationalExperience
             educationalExp={educationalExp}
             setEducationalExp={setEducationalExp}
+            errors={errors}
+            setErrors={setErrors}
           />
           <PracticalExperience
             practicalExp={practicalExp}
             setPracticalExp={setPracticalExp}
+            errors={errors}
+            setErrors={setErrors}
           />
           <Button
             className="submit-form"
             text="Submit"
             onClick={(e) => {
               e.preventDefault();
-              if (validateGeneralInfo(generalInfo, errors, setErrors)) {
+              const genInfoResult = validateSectionInfo(generalInfo, errors, setErrors, "general-information", "generalInformation");
+              const eduExpResult = validateSectionInfo(educationalExp, errors, setErrors, "educational-experience", "educationalExperience");
+              const pracExpResult = validateSectionInfo(practicalExp, errors, setErrors, "practical-experience", "practicalExperience");
+              if (genInfoResult && eduExpResult && pracExpResult) {
                 setShowCV(true);
               }
             }}
@@ -66,28 +67,25 @@ function App() {
   );
 }
 
-function validateGeneralInfo(generalInfo, errors, setErrors) {
+function validateSectionInfo(state, errors, setErrors, containerClass, errorKey) {
   let validInputs = 0;
-  const inputs = document.querySelectorAll(".general-information input");
-  let errorObj = errors;
+  const inputs = document.querySelectorAll(`.${containerClass} input`);
 
   for (const input of inputs) {
     const key = convertKebabToCamel(input.id);
-    console.log(key);
-    if (generalInfo[key]) {
+    if (state[key] && state[key] !== "") {
       validInputs += 1;
     } else {
-      errorObj = {
-        ...errorObj,
-        generalInformation: {
-          ...errorObj.generalInformation,
+      setErrors( errors => ({
+        ...errors,
+        [errorKey]: {
+          ...errors[errorKey],
           [key]: "This field is required."
         }
-      };
+      }));
     }
   }
   
-  setErrors(errorObj);
   return validInputs === inputs.length;
 }
 

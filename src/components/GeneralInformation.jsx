@@ -13,13 +13,13 @@ function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) 
             ...generalInfo,
             firstName: e.target.value,
           });
-          setErrors({
+          setErrors(errors => ({
             ...errors,
             generalInformation: {
                 ...errors.generalInformation,
                 firstName: "",
             }
-          });
+          }));
         }}
         errorMessage={errors.generalInformation.firstName}
       />
@@ -31,13 +31,13 @@ function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) 
             ...generalInfo,
             lastName: e.target.value,
           });
-          setErrors({
+          setErrors(errors => ({
             ...errors,
             generalInformation: {
                 ...errors.generalInformation,
                 lastName: "",
             }
-          });
+          }));
         }}
         errorMessage={errors.generalInformation.lastName}
       />
@@ -50,13 +50,13 @@ function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) 
             ...generalInfo,
             email: e.target.value,
           });
-          setErrors({
+          setErrors(errors => ({
             ...errors,
             generalInformation: {
                 ...errors.generalInformation,
                 email: "",
             }
-          });
+          }));
         }}
         errorMessage={errors.generalInformation.email}
       />
@@ -69,13 +69,13 @@ function GeneralInformation({ generalInfo, setGeneralInfo, errors, setErrors }) 
             ...generalInfo,
             phone: e.target.value,
           });
-          setErrors({
+          setErrors(errors => ({
             ...errors,
             generalInformation: {
                 ...errors.generalInformation,
                 phone: "",
             }
-          });
+          }));
         }}
         errorMessage={errors.generalInformation.phone}
       />

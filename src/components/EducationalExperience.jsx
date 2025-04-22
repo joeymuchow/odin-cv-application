@@ -1,7 +1,7 @@
 import Experience from "./Experience";
 
-function EducationalExperience({ educationalExp, setEducationalExp }) {
-  const educationInfo = [
+function EducationalExperience({ educationalExp, setEducationalExp, errors, setErrors }) {
+  const educationalInfo = [
     {
       id: "school",
       label: "School",
@@ -42,8 +42,10 @@ function EducationalExperience({ educationalExp, setEducationalExp }) {
       title="Educational Experience"
       addButtonClass="add-schools"
       addButtonText="Add school"
-      expType="education"
-      inputInfo={educationInfo}
+      expType="educationalExperience"
+      inputInfo={educationalInfo}
+      errors={errors}
+      setErrors={setErrors}
     />
   );
 }

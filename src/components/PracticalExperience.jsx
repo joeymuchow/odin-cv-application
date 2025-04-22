@@ -1,7 +1,6 @@
 import Experience from "./Experience";
 
-function PracticalExperience({ practicalExp, setPracticalExp }) {
-  // company name, position title, main responsibilities of your jobs, date from and until when you worked for that company
+function PracticalExperience({ practicalExp, setPracticalExp, errors, setErrors }) {
   const practicalInfo = [
     {
       id: "company",
@@ -43,8 +42,10 @@ function PracticalExperience({ practicalExp, setPracticalExp }) {
       title="Practical Experience"
       addButtonClass="add-jobs"
       addButtonText="Add job"
-      expType="practical"
+      expType="practicalExperience"
       inputInfo={practicalInfo}
+      errors={errors}
+      setErrors={setErrors}
     />
   );
 }
