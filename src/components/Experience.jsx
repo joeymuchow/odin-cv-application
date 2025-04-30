@@ -14,8 +14,9 @@ function Experience({
   errors,
   setErrors,
 }) {
-  const [expArray, setExpArray] = useState([]);
-  const [count, setCount] = useState(0);
+  const expFromState = createExpArrayItemsFromState(state[expType]);
+  const [expArray, setExpArray] = useState([...expFromState]);
+  const [count, setCount] = useState(expFromState[expFromState.length-1]?.id + 1 || 0);
 
   return (
     <div className={containerClass}>
@@ -121,6 +122,15 @@ function ExperienceItem({
         ))}
     </>
   );
+}
+
+function createExpArrayItemsFromState(experience) {
+  return experience.map((value) => {
+    return {
+      id: value.id,
+      component: ExperienceItem,
+    };
+  });
 }
 
 export default Experience;

@@ -7,7 +7,7 @@ function GeneralInformation({ state, dispatch, errors, setErrors }) {
       <h2>General Information</h2>
       <Input
         id="first-name"
-        label="First name"
+        label="First name*"
         value={state.generalInformation.firstName}
         onChange={(e) => {
           dispatch({
@@ -27,7 +27,7 @@ function GeneralInformation({ state, dispatch, errors, setErrors }) {
       />
       <Input
         id="last-name"
-        label="Last name"
+        label="Last name*"
         value={state.generalInformation.lastName}
         onChange={(e) => {
           dispatch({
@@ -47,7 +47,7 @@ function GeneralInformation({ state, dispatch, errors, setErrors }) {
       />
       <Input
         id="email"
-        label="Email"
+        label="Email*"
         value={state.generalInformation.email}
         type="email"
         onChange={(e) => {
@@ -68,7 +68,7 @@ function GeneralInformation({ state, dispatch, errors, setErrors }) {
       />
       <Input
         id="phone"
-        label="Phone"
+        label="Phone*"
         value={state.generalInformation.phone}
         type="phone"
         onChange={(e) => {

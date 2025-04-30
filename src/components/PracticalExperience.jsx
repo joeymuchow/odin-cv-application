@@ -4,25 +4,25 @@ function PracticalExperience({ state, dispatch, errors, setErrors }) {
   const practicalInfo = [
     {
       id: "company",
-      label: "Company",
+      label: "Company*",
       type: "text",
       key: "company",
     },
     {
       id: "position",
-      label: "Position",
+      label: "Position*",
       type: "text",
       key: "position",
     },
     {
       id: "responsibilities",
-      label: "Responsibilities",
+      label: "Responsibilities*",
       type: "textarea",
       key: "responsibilities",
     },
     {
       id: "start-date",
-      label: "Start date",
+      label: "Start date*",
       type: "date",
       key: "startDate"
     },

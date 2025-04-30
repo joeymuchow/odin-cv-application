@@ -4,25 +4,25 @@ function EducationalExperience({ state, dispatch, errors, setErrors }) {
   const educationalInfo = [
     {
       id: "school",
-      label: "School",
+      label: "School*",
       type: "text",
       key: "school"
     },
     {
       id: "degree",
-      label: "Degree",
+      label: "Degree*",
       type: "text",
       key: "degree"
     },
     {
       id: "area-of-study",
-      label: "Area of study",
+      label: "Area of study*",
       type: "text",
       key: "areaOfStudy"
     },
     {
       id: "start-date",
-      label: "Start date",
+      label: "Start date*",
       type: "date",
       key: "startDate"
     },
