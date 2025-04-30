@@ -3,8 +3,8 @@ import Button from "./Button";
 import Input from "./Input";
 
 function Experience({
-  experience,
-  setExperience,
+  state,
+  dispatch,
   containerClass,
   title,
   addButtonClass,
@@ -24,8 +24,9 @@ function Experience({
         expArray.map((value, index) => (
           <div key={value.id}>
             <value.component
-              experience={experience}
-              setExperience={setExperience}
+              state={state}
+              dispatch={dispatch}
+              count={count}
               idIndex={value.id}
               expType={expType}
               inputInfo={inputInfo}
@@ -42,6 +43,11 @@ function Experience({
                   return value.id !== experience.id;
                 });
                 setExpArray(filteredArray);
+                dispatch({
+                  type: "remove_Experience",
+                  id: value.id,
+                  expType,
+                });
               }}
             />
             {index !== expArray.length - 1 && <hr />}
@@ -59,6 +65,11 @@ function Experience({
               component: ExperienceItem,
             },
           ]);
+          dispatch({
+            type: "add_new_experience",
+            id: count,
+            expType,
+          });
           setCount(count + 1);
         }}
       />
@@ -67,8 +78,8 @@ function Experience({
 }
 
 function ExperienceItem({
-  experience,
-  setExperience,
+  state,
+  dispatch,
   idIndex,
   expType,
   inputInfo,
@@ -84,10 +95,18 @@ function ExperienceItem({
             id={value.id + idIndex}
             label={value.label}
             type={value.type}
+            value={
+              state[expType].filter((value) => {
+                return value.id === idIndex;
+              })[0][value.key]
+            }
             onChange={(e) => {
-              setExperience({
-                ...experience,
-                [value.key + idIndex]: e.target.value,
+              dispatch({
+                type: "update_experience",
+                expType,
+                id: idIndex,
+                key: value.key,
+                value: e.target.value,
               });
               setErrors(errors => ({
                 ...errors,

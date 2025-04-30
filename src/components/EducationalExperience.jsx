@@ -1,6 +1,6 @@
 import Experience from "./Experience";
 
-function EducationalExperience({ educationalExp, setEducationalExp, errors, setErrors }) {
+function EducationalExperience({ state, dispatch, errors, setErrors }) {
   const educationalInfo = [
     {
       id: "school",
@@ -36,8 +36,8 @@ function EducationalExperience({ educationalExp, setEducationalExp, errors, setE
 
   return (
     <Experience
-      experience={educationalExp}
-      setExperience={setEducationalExp}
+      state={state}
+      dispatch={dispatch}
       containerClass="educational-experience"
       title="Educational Experience"
       addButtonClass="add-schools"

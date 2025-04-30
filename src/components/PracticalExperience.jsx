@@ -1,6 +1,6 @@
 import Experience from "./Experience";
 
-function PracticalExperience({ practicalExp, setPracticalExp, errors, setErrors }) {
+function PracticalExperience({ state, dispatch, errors, setErrors }) {
   const practicalInfo = [
     {
       id: "company",
@@ -36,8 +36,8 @@ function PracticalExperience({ practicalExp, setPracticalExp, errors, setErrors 
 
   return (
     <Experience
-      experience={practicalExp}
-      setExperience={setPracticalExp}
+      state={state}
+      dispatch={dispatch}
       containerClass="practical-experience"
       title="Practical Experience"
       addButtonClass="add-jobs"

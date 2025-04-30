@@ -6,8 +6,6 @@ import PracticalExperience from "./components/PracticalExperience";
 import Button from "./components/Button";
 
 function App() {
-  const [educationalExp, setEducationalExp] = useState({});
-  const [practicalExp, setPracticalExp] = useState({});
   const [state, dispatch] = useReducer(reducer, {
     generalInformation: {},
     educationalExperience: [],
@@ -41,14 +39,14 @@ function App() {
             setErrors={setErrors}
           />
           <EducationalExperience
-            educationalExp={educationalExp}
-            setEducationalExp={setEducationalExp}
+            state={state}
+            dispatch={dispatch}
             errors={errors}
             setErrors={setErrors}
           />
           <PracticalExperience
-            practicalExp={practicalExp}
-            setPracticalExp={setPracticalExp}
+            state={state}
+            dispatch={dispatch}
             errors={errors}
             setErrors={setErrors}
           />
@@ -58,8 +56,8 @@ function App() {
             onClick={(e) => {
               e.preventDefault();
               const genInfoResult = validateSectionInfo(state.generalInformation, errors, setErrors, "general-information", "generalInformation");
-              const eduExpResult = validateSectionInfo(educationalExp, errors, setErrors, "educational-experience", "educationalExperience");
-              const pracExpResult = validateSectionInfo(practicalExp, errors, setErrors, "practical-experience", "practicalExperience");
+              const eduExpResult = validateSectionInfo(state.educationalExperience, errors, setErrors, "educational-experience", "educationalExperience");
+              const pracExpResult = validateSectionInfo(state.practicalExperience, errors, setErrors, "practical-experience", "practicalExperience");
               if (genInfoResult && eduExpResult && pracExpResult) {
                 setShowCV(true);
               }
@@ -83,10 +81,16 @@ function reducer(state, action) {
       };
     }
     // experienceType: educationalExperience || practicalExperience
+    case "add_new_experience": {
+      return {
+        ...state,
+        [action.expType]: [...state[action.expType], {id: action.id}]
+      }
+    }
     case "update_experience": {
       return {
         ...state,
-        [action.experienceType]: state[action.experienceType].map((item) =>
+        [action.expType]: state[action.expType].map((item) =>
           item.id === action.id ? {...item, [action.key]: action.value} : item
         ),
       };
@@ -94,7 +98,7 @@ function reducer(state, action) {
     case "remove_Experience": {
       return {
         ...state,
-        [action.experienceType]: state[action.experienceType].filter((value) => value.id !== action.id),
+        [action.expType]: state[action.expType].filter((value) => value.id !== action.id),
       };
     }
   }
