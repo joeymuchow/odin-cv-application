@@ -1,0 +1,12 @@
+.company-container {
+  margin-bottom: 10px;
+}
+
+.company-title {
+  display: flex;
+}
+
+.company-title h4,
+.company-title p {
+  margin: 0;
+}
