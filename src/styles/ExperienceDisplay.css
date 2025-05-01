@@ -1,0 +1,12 @@
+.experience-container {
+  margin-bottom: 10px;
+}
+
+.experience-title {
+  display: flex;
+}
+
+.experience-title h4,
+.experience-title p {
+  margin: 0;
+}

@@ -1,39 +1,7 @@
 import Experience from "./Experience";
+import { practicalInfo } from "../constants";
 
 function PracticalExperience({ state, dispatch, errors, setErrors }) {
-  const practicalInfo = [
-    {
-      id: "company",
-      label: "Company*",
-      type: "text",
-      key: "company",
-    },
-    {
-      id: "position",
-      label: "Position*",
-      type: "text",
-      key: "position",
-    },
-    {
-      id: "responsibilities",
-      label: "Responsibilities*",
-      type: "textarea",
-      key: "responsibilities",
-    },
-    {
-      id: "start-date",
-      label: "Start date*",
-      type: "date",
-      key: "startDate"
-    },
-    {
-      id: "end-date",
-      label: "End date",
-      type: "date",
-      key: "endDate"
-    },
-  ];
-
   return (
     <Experience
       state={state}
