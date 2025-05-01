@@ -184,12 +184,12 @@ function validateDateInputs(setErrors, expType, errorKey) {
     const end = dateInputs[i+1];
 
     if (!end.value) {
-      validDateInputs += 1;
+      validDateInputs += 2;
       continue;
     }
 
     if (isAfter(end.value, start.value)) {
-      validDateInputs += 1;
+      validDateInputs += 2;
     } else {
       const key = convertKebabToCamel(dateInputs[i].id);
       setErrors( errors => ({
