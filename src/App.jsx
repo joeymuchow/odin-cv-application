@@ -5,6 +5,7 @@ import EducationalExperience from "./components/EducationalExperience";
 import PracticalExperience from "./components/PracticalExperience";
 import Button from "./components/Button";
 import CVApp from "./components/CVApp";
+import { isAfter } from "date-fns";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, {
@@ -19,11 +20,6 @@ function App() {
     practicalExperience: {},
   });
 
-  // make a visual component that uses info from above components to create a resume
-
-  // There will be a submit button for taking all the entered info and displaying it in a view
-  // There should be either one edit button for the whole form or one for each section. I'm leaning toward one edit button for everything
-  // Clicking edit will show the components for entering info again, with their current values filled in
   return (
     <>
       
@@ -62,7 +58,9 @@ function App() {
                 const genInfoResult = validateGeneralInfo(state.generalInformation, setErrors);
                 const eduExpResult = validateExperienceSectionInfo(state.educationalExperience, setErrors, "educational-experience", "educationalExperience");
                 const pracExpResult = validateExperienceSectionInfo(state.practicalExperience, setErrors, "practical-experience", "practicalExperience");
-                if (genInfoResult && eduExpResult && pracExpResult) {
+                const eduExpDateResult = validateDateInputs(setErrors, "educational-experience", "educationalExperience");
+                const pracExpDateResult = validateDateInputs(setErrors, "practical-experience", "practicalExperience");
+                if (genInfoResult && eduExpResult && pracExpResult && eduExpDateResult && pracExpDateResult) {
                   setShowCV(true);
                 }
               }}
@@ -177,6 +175,34 @@ function convertKebabToCamel(id) {
   }
 }
 
-// TODO: validate that the start date is not after the end date
+function validateDateInputs(setErrors, expType, errorKey) {
+  const dateInputs = document.querySelectorAll(`.${expType} input[type=date]`);
+  let validDateInputs = 0;
+
+  for (let i = 0; i < dateInputs.length; i += 2) {
+    const start = dateInputs[i];
+    const end = dateInputs[i+1];
+
+    if (!end.value) {
+      validDateInputs += 1;
+      continue;
+    }
+
+    if (isAfter(end.value, start.value)) {
+      validDateInputs += 1;
+    } else {
+      const key = convertKebabToCamel(dateInputs[i].id);
+      setErrors( errors => ({
+        ...errors,
+        [errorKey]: {
+          ...errors[errorKey],
+          [key]: "The start date must be before the end date.",
+        }
+      }));
+    }
+  }
+
+  return validDateInputs === dateInputs.length;
+}
 
 export default App;
