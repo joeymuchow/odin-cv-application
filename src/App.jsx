@@ -4,6 +4,7 @@ import GeneralInformation from "./components/GeneralInformation";
 import EducationalExperience from "./components/EducationalExperience";
 import PracticalExperience from "./components/PracticalExperience";
 import Button from "./components/Button";
+import CVApp from "./components/CVApp";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, {
@@ -25,45 +26,49 @@ function App() {
   // Clicking edit will show the components for entering info again, with their current values filled in
   return (
     <>
-      <h1>CV Generation Application</h1>
+      
       {showCV ? (
         <div>
+          <CVApp state={state} />
           <Button className="edit-btn" text="Edit" onClick={() => setShowCV(false)} />
         </div>
       ) : (
-        <form className="cv-form">
-          <GeneralInformation
-            state={state}
-            dispatch={dispatch}
-            errors={errors}
-            setErrors={setErrors}
-          />
-          <EducationalExperience
-            state={state}
-            dispatch={dispatch}
-            errors={errors}
-            setErrors={setErrors}
-          />
-          <PracticalExperience
-            state={state}
-            dispatch={dispatch}
-            errors={errors}
-            setErrors={setErrors}
-          />
-          <Button
-            className="submit-form"
-            text="Submit"
-            onClick={(e) => {
-              e.preventDefault();
-              const genInfoResult = validateGeneralInfo(state.generalInformation, setErrors);
-              const eduExpResult = validateExperienceSectionInfo(state.educationalExperience, setErrors, "educational-experience", "educationalExperience");
-              const pracExpResult = validateExperienceSectionInfo(state.practicalExperience, setErrors, "practical-experience", "practicalExperience");
-              if (genInfoResult && eduExpResult && pracExpResult) {
-                setShowCV(true);
-              }
-            }}
-          />
-        </form>
+        <>
+          <h1>CV Generation Application</h1>
+          <form className="cv-form">
+            <GeneralInformation
+              state={state}
+              dispatch={dispatch}
+              errors={errors}
+              setErrors={setErrors}
+            />
+            <EducationalExperience
+              state={state}
+              dispatch={dispatch}
+              errors={errors}
+              setErrors={setErrors}
+            />
+            <PracticalExperience
+              state={state}
+              dispatch={dispatch}
+              errors={errors}
+              setErrors={setErrors}
+            />
+            <Button
+              className="submit-form"
+              text="Submit"
+              onClick={(e) => {
+                e.preventDefault();
+                const genInfoResult = validateGeneralInfo(state.generalInformation, setErrors);
+                const eduExpResult = validateExperienceSectionInfo(state.educationalExperience, setErrors, "educational-experience", "educationalExperience");
+                const pracExpResult = validateExperienceSectionInfo(state.practicalExperience, setErrors, "practical-experience", "practicalExperience");
+                if (genInfoResult && eduExpResult && pracExpResult) {
+                  setShowCV(true);
+                }
+              }}
+            />
+          </form>
+        </>
       )}
     </>
   );

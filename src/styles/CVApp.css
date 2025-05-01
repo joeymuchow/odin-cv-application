@@ -1,0 +1,14 @@
+.cv-container {
+  max-width: 1000px;
+  width: 100%;
+  text-align: left;
+  justify-self: center;
+}
+
+.cv-container h2 {
+  margin: 5px 0;
+}
+
+.cv-container p {
+  margin: 0;
+}

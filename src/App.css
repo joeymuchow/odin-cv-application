@@ -1,10 +1,23 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 2rem;
   text-align: center;
 }
 
 h1 {
   text-align: center;
+}
+
+#root > div {
+  width: 100%;
+}
+
+.cv-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
